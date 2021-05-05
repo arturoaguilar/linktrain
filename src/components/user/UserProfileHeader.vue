@@ -1,6 +1,6 @@
 <template>
 
-  <div class="profile__header" v-for="user in userinfo" :key="user.name">
+  <div class="profile__header" v-for="user in userInfo" :key="user.name">
 
         <img class="profile__image" :src="user.profilePicture">
               <b>@{{ user.name }}</b>
@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "UserProfileHeader",
-  props: ["userinfo"],
+  props: ["userInfo"],
   setup() {
 
   },

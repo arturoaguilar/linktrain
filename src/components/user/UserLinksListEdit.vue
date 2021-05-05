@@ -1,35 +1,44 @@
 <template>
   <div class="user__list">
-    <user-link
+    <!-- <user-link
       v-for="ulink in userLinks"
       :key="ulink.code"
       :ulink="ulink"
-      :userInfo="newUserInfo"
+      :userInfo="userInfo"
     >
-    </user-link>
+    </user-link> -->
+    <user-link-edit
+      v-for="ulink in userLinks"
+      :key="ulink.code"
+      :ulink="ulink"
+      :userInfo="userInfo"
+    ></user-link-edit>
   </div>
 </template>
 <script>
 import { ref, toRef } from "@vue/reactivity";
 import UserLink from "./UserLink.vue";
+import UserLinkEdit from './UserLinkEdit.vue';
 export default {
-  components: { UserLink },
+  components: { UserLink, UserLinkEdit },
   name: "UserLinksList",
   props: ["userName", "userInfo"],
   setup(props) {
     const userLinks = ref([]);
-    const nuserName = toRef(props, "userName");
-    const newUserInfo = toRef(props, "userInfo");
-
-  
-    fetch("https://linktrainback.herokuapp.com/links/" + nuserName.value)
+    
+  const userName = 'arturoa';
+  const newUserInfo= toRef(props,"userInfo");
+    console.log("NEW USER INFO ");
+    console.log(newUserInfo.value[0]);
+    fetch("https://linktrainback.herokuapp.com/links/" + userName)
       .then((res) => res.json())
       .then((data) => {
         userLinks.value = data;
       });
     return {
       userLinks,
-      newUserInfo,
+      newUserInfo
+  
     };
   },
 };
